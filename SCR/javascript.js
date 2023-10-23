@@ -2,24 +2,35 @@ const form = document.getElementById('appointment-form');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Obtenha as respostas do formulário
+    // Obter respostas
     const name = form.elements['name'].value;
     const interest = form.elements['interest'].value;
 
-    // Verifique se o usuário tem um horário marcado
+    // Averigua usuario
     const usuarioTemHorarioMarcado = verificarHorarioMarcado(interest);
 
-    // Exibe uma mensagem com base na situação do usuário
+    // Resultado da averiguacao
     if (usuarioTemHorarioMarcado) {
         alert('Ótimo, ' + name + '! Você já tem um horário marcado. Obrigado por escolher AgendaZap.');
     } else {
-        // Redirecione para o WhatsApp para agendar um horário
+        // Redirecione
         window.location.href = 'https://wa.me/seu-numero-de-telefone?text=Olá, gostaria de agendar um horário para ' + interest;
     }
 });
 
-// Função para verificar se o usuário tem um horário marcado (simulação)
+// Funcao para averiguar usuario
 function verificarHorarioMarcado(interest) {
-    // Simulação: verifique se o horário de interesse corresponde a um horário marcado
-    return false; // Mude para 'true' se o usuário tiver um horário marcado
+    // Simulação de horários marcados (horas em formato HH:MM)
+    // Simulação de horários marcados (horas em formato HH:MM)
+    const horariosMarcados = {
+        "09:00": true,
+        "11:30": true,
+    };
+
+    // Função para verificar se o usuário tem um horário marcado
+    function verificarHorarioMarcado(interest) {
+        // Verifica se o horário de interesse está na lista de horários marcados
+        return horariosMarcados[interest] || false;
+    }
+    return false;
 }
