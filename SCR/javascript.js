@@ -1,36 +1,31 @@
-const form = document.getElementById('appointment-form');
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+// Simulacao de horarios marcados (horas em formato HH:MM)
+const horariosMarcados = {
+    "09:00": true,
+    "11:30": true,
+};
+
+// Funcao para verificar se o usuario tem um horario marcado
+function verificarHorarioMarcado(horarioInteresse) {
+    // Verifica se o horario de interesse esta na lista de horarios marcados
+    return horariosMarcados[horarioInteresse] || false;
+}
+
+const formulario = document.getElementById('formulario-agendamento');
+formulario.addEventListener('submit', function (evento) {
+    evento.preventDefault();
 
     // Obter respostas
-    const name = form.elements['name'].value;
-    const interest = form.elements['interest'].value;
+    const nome = formulario.elements['nome'].value;
+    const horarioInteresse = formulario.elements['horario'].value;
 
-    // Averigua usuario
-    const usuarioTemHorarioMarcado = verificarHorarioMarcado(interest);
+    // Averiguar usuario
+    const usuarioTemHorarioMarcado = verificarHorarioMarcado(horarioInteresse);
 
     // Resultado da averiguacao
     if (usuarioTemHorarioMarcado) {
-        alert('Ótimo, ' + name + '! Você já tem um horário marcado. Obrigado por escolher AgendaZap.');
+        alert('Otimo, ' + nome + '! Voce ja tem um horario marcado. Obrigado por escolher AgendaZap.');
     } else {
-        // Redirecione
-        window.location.href = 'https://wa.me/seu-numero-de-telefone?text=Olá, gostaria de agendar um horário para ' + interest;
+        // Redirecionar
+        window.location.href = 'https://wa.me/seu-numero-de-telefone?text=Ola, gostaria de agendar um horario para ' + horarioInteresse;
     }
 });
-
-// Funcao para averiguar usuario
-function verificarHorarioMarcado(interest) {
-    // Simulação de horários marcados (horas em formato HH:MM)
-    // Simulação de horários marcados (horas em formato HH:MM)
-    const horariosMarcados = {
-        "09:00": true,
-        "11:30": true,
-    };
-
-    // Função para verificar se o usuário tem um horário marcado
-    function verificarHorarioMarcado(interest) {
-        // Verifica se o horário de interesse está na lista de horários marcados
-        return horariosMarcados[interest] || false;
-    }
-    return false;
-}
